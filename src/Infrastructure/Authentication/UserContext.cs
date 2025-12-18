@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Authentication;
 
+public sealed class UserContextUnavailableException : Exception
+{
+    public UserContextUnavailableException() : base("User context is unavailable")
+    {
+    }
+}
+
 internal sealed class UserContext : IUserContext
 {
-    private sealed class UserContextUnavailableException : Exception
-    {
-        public UserContextUnavailableException() : base("User context is unavailable")
-        {
-        }
-    }
-
     private readonly IHttpContextAccessor _httpContextAccessor;
 
     public UserContext(IHttpContextAccessor httpContextAccessor)
